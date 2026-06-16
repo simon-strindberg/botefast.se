@@ -1,11 +1,680 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <title>Botefast</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Botefast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111;
+      --dark: #222;
+      --muted: #888;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --bg-light: #f7f7f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--bg);
+      color: var(--black);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* LAYOUT */
+    section {
+      padding: 7rem 5%;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .container.left {
+      text-align: left;
+    }
+
+    .label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 1.75rem;
+    }
+
+    h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container.left p { margin: 0; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 6rem;
+      background: var(--bg);
+    }
+
+    #hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hero p {
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 5rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      justify-content: center;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-family: 'EB Garamond', serif;
+      font-size: 2.6rem;
+      color: var(--black);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cta-link {
+      display: inline-block;
+      color: var(--black);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .cta-link:hover { opacity: 0.4; }
+
+    /* HOW WE WORK */
+    #how { background: var(--bg-light); }
+
+    #how .container { max-width: 960px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      text-align: left;
+    }
+
+    .step {
+      padding: 2.5rem 3rem 2.5rem 0;
+      border-top: 2px solid var(--black);
+    }
+
+    .step:not(:last-child) {
+      margin-right: 3rem;
+      border-right: 1px solid var(--border);
+      padding-right: 3rem;
+    }
+
+    .step-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .step p {
+      font-size: 1rem;
+      margin: 0;
+      color: #666;
+    }
+
+    /* CASE */
+    #case { background: var(--bg); }
+
+    #case .container { max-width: 860px; }
+
+    .case-body {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      text-align: left;
+    }
+
+    .case-body > p { margin: 0 0 1.5rem; }
+
+    .case-work {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .case-work-item {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .case-work-item::before {
+      content: '—';
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .case-contacts {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .case-numbers {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      align-self: start;
+    }
+
+    .case-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-row:last-child { border-bottom: none; }
+
+    .case-row-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .case-row-value {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--black);
+    }
+
+    .case-row-value.positive {
+      font-weight: 500;
+    }
+
+    /* INVEST */
+    #invest { background: var(--bg-light); }
+
+    #invest .container { max-width: 860px; }
+
+    .invest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 5rem;
+      margin-top: 3.5rem;
+      text-align: left;
+    }
+
+    .invest-point {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .invest-point p { font-size: 1rem; margin: 0; color: #666; }
+
+    .invest-note {
+      grid-column: 1 / -1;
+      border: 1px solid #ccc;
+      padding: 1.75rem 2.25rem;
+      font-size: 0.9rem;
+      color: #777;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    /* TEAM */
+    #team { background: var(--bg); }
+
+    #team .container { max-width: 860px; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3.5rem;
+      text-align: left;
+    }
+
+    .person {
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--black);
+    }
+
+    .person-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .person h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 0.75rem;
+      color: var(--black);
+    }
+
+    .person p { font-size: 1rem; margin: 0; color: #666; }
+
+    /* CONTACT */
+    #contact { background: var(--black); }
+
+    #contact .container { max-width: 700px; }
+
+    #contact .label { color: #666; }
+
+    #contact h2 { color: #fff; margin-bottom: 1rem; }
+
+    #contact > .container > p { color: #888; margin-bottom: 3rem; }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .contact-card {
+      border: 1px solid #333;
+      padding: 2rem;
+    }
+
+    .contact-card h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+
+    .contact-card .role {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-card a {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .contact-card a:hover { color: #fff; }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 2rem 5%;
+      border-top: 1px solid #1e1e1e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: #444;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      section { padding: 5rem 5%; }
+      .hero-stats { gap: 2.5rem; }
+      .steps,
+      .case-body,
+      .invest-grid,
+      .team-grid,
+      .contact-cards { grid-template-columns: 1fr; gap: 2.5rem; }
+      .step:not(:last-child) { border-right: none; padding-right: 0; margin-right: 0; }
+      .invest-note { grid-column: 1; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Välkommen till Botefast</h1>
-    <p>Denna webbplats är under uppbyggnad.</p>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">
+      <img src="logo.png" alt="Botefast" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span class="nav-logo-text" style="display:none">Botefast</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">Hur vi arbetar</a></li>
+      <li><a href="#case">Case</a></li>
+      <li><a href="#invest">Investera</a></li>
+      <li><a href="#team">Om oss</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <p class="label">Fastigheter med eftertanke</p>
+      <h1>Vi köper rätt,<br>genomför planen,<br>levererar resultat.</h1>
+      <p>Botefast identifierar fastigheter med orealiserad potential. Vi adderar värde genom renovering, förädling och strukturella förbättringar — med långsiktighet och lönsamhet som ledstjärnor.</p>
+      <a href="#case" class="cta-link">Se vårt första case</a>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">2025</span>
+          <span class="stat-label">Grundat</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">1</span>
+          <span class="stat-label">Genomförda projekt</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">25 %</span>
+          <span class="stat-label">Avkastning, projekt 1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- HOW WE WORK -->
+  <section id="how">
+    <div class="container">
+      <p class="label">Vår metod</p>
+      <h2>En tydlig process.<br>Varje gång.</h2>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">01 — Hitta</p>
+          <h3>Rätt objekt</h3>
+          <p>Vi letar på marknader vi känner väl. Objekt med stor potential till lågt pris, där vi kan tillföra genuint värde.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">02 — Planera</p>
+          <h3>Tydlig projektplan</h3>
+          <p>Innan förvärv har vi en konkret plan: vad vi ska göra, vad det kostar, och vad vi förväntar oss att sälja för.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">03 — Genomföra</p>
+          <h3>Leverera och sälja</h3>
+          <p>Vi genomför planen. Renovering, förädling och strukturella åtgärder — sedan en maximerad försäljning med etablerade mäklarkontakter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CASE -->
+  <section id="case">
+    <div class="container">
+      <p class="label">Projekt 1 — 2025</p>
+      <h2>Från nedgånget dödsbo<br>till lönsam affär.</h2>
+      <div class="case-body">
+        <div>
+          <p>Vi köpte ett kraftigt nedgånget dödsbo på en marknad vi kände väl. Med en tydlig plan genomförde vi ett komplett lyft och sålde med god marginal.</p>
+          <div class="case-work">
+            <div class="case-work-item">Röjning av skog och tomt — öppnade upp fastigheten</div>
+            <div class="case-work-item">Målning av fasad och nybyggd altan</div>
+            <div class="case-work-item">Renovering av samtliga golv, väggar och tak</div>
+            <div class="case-work-item">Nytt kök från grunden</div>
+            <div class="case-work-item">Nytt badrum från grunden</div>
+            <div class="case-work-item">Estetisk uppgradering av all el — uttag, brytare etc.</div>
+          </div>
+          <div class="case-contacts">
+            Försäljningen genomfördes i samarbete med etablerade lokala mäklare med god kännedom om målgrupp och marknad.
+          </div>
+        </div>
+        <div class="case-numbers">
+          <div class="case-row">
+            <span class="case-row-label">Total investering</span>
+            <span class="case-row-value">3 300 000 kr</span>
+          </div>
+          <div class="case-row">
+            <span class="case-row-label">Försäljningspris</span>
+            <span class="case-row-value">4 125 000 kr</span>
+          </div>
+          <div class="case-row">
+            <span class="case-row-label">Bruttoresultat</span>
+            <span class="case-row-value positive">+ 825 000 kr</span>
+          </div>
+          <div class="case-row">
+            <span class="case-row-label">Avkastning</span>
+            <span class="case-row-value positive">25 %</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- INVEST -->
+  <section id="invest">
+    <div class="container">
+      <p class="label">Investera med oss</p>
+      <h2>Tryggt. Transparent.<br>Med en reell uppsida.</h2>
+      <div class="invest-grid">
+        <div class="invest-point">
+          <h3>Garanterad ränta</h3>
+          <p>Du erhåller 5 % årlig ränta på ditt lån, oavsett projektets utfall. Fastigheten utgör säkerhet för kapitalet.</p>
+        </div>
+        <div class="invest-point">
+          <h3>Du godkänner projektet</h3>
+          <p>Innan vi startar presenterar vi fastigheten, projektplanen och en kalkyl med ett definierat målvärde. Du tar ställning innan ett öre är bundet.</p>
+        </div>
+        <div class="invest-point">
+          <h3>Du ligger först i skuldlistan</h3>
+          <p>Botefast investerar eget kapital och ligger sist. Externa långivare prioriteras vid en eventuell avveckling.</p>
+        </div>
+        <div class="invest-point">
+          <h3>Uppsida vid överavkastning</h3>
+          <p>Överstiger försäljningsresultatet det planerade målvärdet, tillfaller en del av den överskjutande vinsten kreditgivarna — utöver räntan.</p>
+        </div>
+        <div class="invest-point">
+          <h3>Minimiinvestering</h3>
+          <p>Vi söker långivare som investerar minst <strong>1 000 000 kr</strong> per projekt.</p>
+        </div>
+        <div class="invest-point">
+          <h3>Nästa steg</h3>
+          <p>Vi befinner oss nu i processen att identifiera nästa projekt. Hör av dig för att få ett fullständigt investeringsmemorandum.</p>
+        </div>
+        <div class="invest-note">
+          <strong>Viktigt:</strong> Detta är inte ett prospekt eller ett offentligt erbjudande. Informationen riktar sig till ett begränsat antal kvalificerade investerare. Allt sker i form av privata låneavtal med individuella villkor.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="container">
+      <p class="label">Grundarna</p>
+      <h2>Erfarenhet och<br>integritet i kombination.</h2>
+      <div class="team-grid">
+        <div class="person">
+          <p class="person-title">VD &amp; Grundare</p>
+          <h3>Joakim Bergström</h3>
+          <p>Joakim har flera års operativ erfarenhet av fastighetsförvaltning och ansvarar för projektledning och genomförande. Med sin bakgrund inom VVS-teknik hos ett av Sveriges ledande grossistföretag har han ett etablerat nätverk inom VVS, fastighetsskötsel och teknisk förvaltning.</p>
+        </div>
+        <div class="person">
+          <p class="person-title">Styrelseordförande &amp; Grundare</p>
+          <h3>Simon Strindberg</h3>
+          <p>Simon har bakgrund från flera framgångsrika bolagsbyggen — grundarteamet på Budbee, tidiga roller på Klarna, investerare och ledningsgruppen på Froda. Idag COO på Opti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="label">Kontakt</p>
+      <h2>Låt oss prata.</h2>
+      <p>Är du intresserad av att investera i nästa projekt, eller vill du veta mer om hur vi arbetar? Hör av dig direkt.</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <h3>Joakim Bergström</h3>
+          <p class="role">VD</p>
+          <a href="mailto:joakim@botefast.se">joakim@botefast.se</a>
+        </div>
+        <div class="contact-card">
+          <h3>Simon Strindberg</h3>
+          <p class="role">Styrelseordförande</p>
+          <a href="mailto:simon@botefast.se">simon@botefast.se</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Botefast AB</span>
+    <span>Stockholm, Sverige</span>
+  </footer>
+
 </body>
 </html>
