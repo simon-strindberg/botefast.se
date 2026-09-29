@@ -318,6 +318,74 @@
       font-weight: 500;
     }
 
+    /* ONGOING PROJECT */
+    #ongoing { background: var(--bg-light); }
+    #ongoing .container { max-width: 860px; }
+
+    .ongoing-grid {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      text-align: left;
+    }
+
+    .ongoing-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .ongoing-dot {
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .ongoing-facts {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      align-self: start;
+      background: var(--bg);
+    }
+
+    .ongoing-fact {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ongoing-fact:last-child { border-bottom: none; }
+
+    .ongoing-fact-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ongoing-fact-value {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--black);
+    }
+
     /* INVEST */
     #invest { background: var(--bg-light); }
 
@@ -387,6 +455,31 @@
     }
 
     .person p { font-size: 1rem; margin: 0; color: #666; }
+
+    .person-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      margin-bottom: 1.5rem;
+      display: block;
+      background: var(--bg-light);
+    }
+
+    .person-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-light);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
 
     /* CONTACT */
     #contact { background: var(--black); }
@@ -466,6 +559,7 @@
       .hero-stats { gap: 2.5rem; }
       .steps,
       .case-body,
+      .ongoing-grid,
       .invest-grid,
       .team-grid,
       .contact-cards { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -485,6 +579,7 @@
     <ul class="nav-links">
       <li><a href="#how">Hur vi arbetar</a></li>
       <li><a href="#case">Case</a></li>
+      <li><a href="#ongoing">Pågående</a></li>
       <li><a href="#invest">Investera</a></li>
       <li><a href="#team">Om oss</a></li>
       <li><a href="#contact">Kontakt</a></li>
@@ -504,8 +599,8 @@
           <span class="stat-label">Grundat</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">1</span>
-          <span class="stat-label">Genomförda projekt</span>
+          <span class="stat-number">2</span>
+          <span class="stat-label">Projekt totalt</span>
         </div>
         <div class="stat-item">
           <span class="stat-number">20 %</span>
@@ -592,6 +687,44 @@
 
   <hr class="divider" />
 
+  <!-- ONGOING PROJECT -->
+  <section id="ongoing">
+    <div class="container">
+      <p class="label">Pågående projekt</p>
+      <h2>Svinningeuddsvägen 25,<br>Svinninge.</h2>
+      <div class="ongoing-grid">
+        <div>
+          <div class="ongoing-status">
+            <span class="ongoing-dot"></span>
+            Pågår just nu
+          </div>
+          <p style="margin: 0 0 1.5rem;">Vi har förvärvat en fastighet i Svinninge med tydlig förädlingspotential. Projektet är strukturerat med externt kapital och genomförs med samma metodiska approach som i vårt första case.</p>
+          <p style="margin: 0; font-size: 1rem; color: #666;">Projektet backas av två externa finansiärer som investerat i affären. Finansieringen är strukturerad med fastigheten som säkerhet och en definierad projektplan godkänd av samtliga parter innan start.</p>
+        </div>
+        <div class="ongoing-facts">
+          <div class="ongoing-fact">
+            <span class="ongoing-fact-label">Adress</span>
+            <span class="ongoing-fact-value">Svinningeuddsvägen 25</span>
+          </div>
+          <div class="ongoing-fact">
+            <span class="ongoing-fact-label">Ort</span>
+            <span class="ongoing-fact-value">Svinninge</span>
+          </div>
+          <div class="ongoing-fact">
+            <span class="ongoing-fact-label">Finansiärer</span>
+            <span class="ongoing-fact-value">2 externa</span>
+          </div>
+          <div class="ongoing-fact">
+            <span class="ongoing-fact-label">Status</span>
+            <span class="ongoing-fact-value">Under genomförande</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
   <!-- INVEST -->
   <section id="invest">
     <div class="container">
@@ -619,8 +752,8 @@
           <p>Vi söker långivare som investerar minst <strong>1 000 000 kr</strong> per projekt.</p>
         </div>
         <div class="invest-point">
-          <h3>Nästa steg</h3>
-          <p>Vi befinner oss nu i processen att identifiera nästa projekt. Hör av dig för att få ett fullständigt investeringsmemorandum.</p>
+          <h3>Nästa projekt</h3>
+          <p>Projekt 2 är redan igång. Är du intresserad av kommande projekt — hör av dig för att få ett fullständigt investeringsmemorandum.</p>
         </div>
         <div class="invest-note">
           <strong>Viktigt:</strong> Detta är inte ett prospekt eller ett offentligt erbjudande. Informationen riktar sig till ett begränsat antal kvalificerade investerare. Allt sker i form av privata låneavtal med individuella villkor.
@@ -638,11 +771,15 @@
       <h2>Erfarenhet och<br>integritet i kombination.</h2>
       <div class="team-grid">
         <div class="person">
+          <img src="joakim.png" alt="Joakim Bergström" class="person-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="person-photo-placeholder" style="display:none">Foto kommer</div>
           <p class="person-title">VD &amp; Grundare</p>
           <h3>Joakim Bergström</h3>
           <p>Joakim har flera års operativ erfarenhet av fastighetsförvaltning och ansvarar för projektledning och genomförande. Med sin bakgrund inom VVS-teknik hos ett av Sveriges ledande grossistföretag har han ett etablerat nätverk inom VVS, fastighetsskötsel och teknisk förvaltning.</p>
         </div>
         <div class="person">
+          <img src="simon.png" alt="Simon Strindberg" class="person-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="person-photo-placeholder" style="display:none">Foto kommer</div>
           <p class="person-title">Styrelseordförande &amp; Grundare</p>
           <h3>Simon Strindberg</h3>
           <p>Simon har bakgrund från flera framgångsrika bolagsbyggen — grundarteamet på Budbee, tidiga roller på Klarna, investerare och ledningsgruppen på Froda. Idag COO på Opti.</p>
